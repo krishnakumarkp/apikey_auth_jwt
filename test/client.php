@@ -1,7 +1,7 @@
 <?php
 require "../bootstrap.php";
 
-$jwt  = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMjgiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1NzE0NzM5OTF9.fBOoZptx3-tKo1M9ATD_RdC7_WG1Wr0LeBvi3QAVjws";
+$jwt  = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTU3MTQ3MzAwNH0.hHWpTZM8QNYNXoi5HBOJttK51vTxJReQz7YfxZvwCG4";
 
 $url = "http://127.0.0.1/apikey_auth_jwt/person";
 

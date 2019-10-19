@@ -33,6 +33,7 @@ if (!isset($bearerToken)) {
     echo json_encode($status);
     exit;
 }
+
 if (!authenticate($bearerToken)) {
     header('WWW-Authenticate: Basic realm="WRONG TOKEN"');
     header('HTTP/1.0 401 Unauthorized');
@@ -51,12 +52,16 @@ $controller->processRequest();
 
 function authenticate($jwt) {
     try {
+        if (!isset($jwt)) {
+            throw new Exception("token not set");
+        }
         // split the token
         $tokenParts = explode('.', $jwt);
         $header = base64_decode($tokenParts[0]);
         $payload = base64_decode($tokenParts[1]);
         $signatureProvided = $tokenParts[2];
-        $tokenExpired = false;
+        $tokenExpired = true;
+        $signatureValid = false;
 
         $secret = getenv('SECRET');
 
@@ -67,8 +72,8 @@ function authenticate($jwt) {
             throw new Exception("expiration not set");
         }
 
-        if (($expiration - time()) < 0) {
-            $tokenExpired = true;
+        if (($expiration - time()) > 0) {
+            $tokenExpired = false;
         }
 
         // build a signature based on the header and payload using the secret
